@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DoceboTest</string>
+
+    <string name="field_item_name_hint">Item Name</string>
+    <string name="field_course_type_hint">Course Type</string>
+
+    <string name="btn_search_text">Search</string>
+</resources>
