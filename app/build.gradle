@@ -49,10 +49,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
 
-    // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
     // UI
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.mikepenz:aboutlibraries:7.0.3'
@@ -65,9 +61,19 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
 
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
     // RxBinding
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.0.0'
+
+    // RxLifecycle
+    implementation 'com.trello.rxlifecycle3:rxlifecycle-kotlin:3.1.0'
+    implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle-kotlin:3.1.0'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
@@ -80,6 +86,7 @@ dependencies {
 
     // Utils
     implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
+    implementation 'com.basgeekball:awesome-validation:4.2'
 
     // Test
     testImplementation 'junit:junit:4.12'

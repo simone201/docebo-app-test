@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface DoceboService {
 
-    @GET("/catalog")
+    @GET("catalog")
     fun getCatalog(@Query("type") courseType: String,
                    @Query("search_text") itemName: String) : Maybe<DoceboModels.APIResponse>
 
@@ -19,7 +19,7 @@ interface DoceboService {
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://demomobile.docebosaas.com/learn/v1")
+                .baseUrl("https://demomobile.docebosaas.com/learn/v1/")
                 .build()
 
             return retrofit.create(DoceboService::class.java)

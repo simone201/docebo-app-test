@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="course_type_items">
+        <item>All</item>
+        <item>Classroom</item>
+        <item>E-Learning</item>
+        <item>Mobile</item>
+        <item>Webinar</item>
+        <item>Learning Plan</item>
+    </string-array>
+
+    <string-array name="course_type_values">
+        <item>all</item>
+        <item>classroom</item>
+        <item>elearning</item>
+        <item>mobile</item>
+        <item>webinar</item>
+        <item>learning_plan</item>
+    </string-array>
+
+</resources>

@@ -5,4 +5,7 @@
     <string name="field_course_type_hint">Course Type</string>
 
     <string name="btn_search_text">Search</string>
+
+    <string name="error_field_not_empty">This field should not be empty</string>
+    <string name="error_request_failed">Error during network request</string>
 </resources>
