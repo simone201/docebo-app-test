@@ -19,27 +19,18 @@
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/itemNameContainer" />
+        app:layout_constraintBottom_toTopOf="@+id/itemNameField" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/itemNameContainer"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/itemNameField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:padding="@dimen/activity_vertical_margin"
+        android:background="@color/md_grey_50"
         android:hint="@string/field_item_name_hint"
-        android:background="@android:color/transparent"
-        app:boxBackgroundMode="outline"
-        app:layout_constraintBottom_toTopOf="@+id/courseTypeContainer">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/itemNameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/activity_vertical_margin"
-            android:background="@color/md_grey_50"
-            android:lines="1" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:lines="1"
+        app:layout_constraintBottom_toTopOf="@+id/courseTypeContainer" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/courseTypeContainer"
