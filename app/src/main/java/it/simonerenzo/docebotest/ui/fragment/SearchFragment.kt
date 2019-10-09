@@ -53,9 +53,9 @@ class SearchFragment : Fragment() {
             .subscribe {
                 if (validators.validate()) {
                     activity.searchCatalog(
-                            courseTypeField.text.toString(),
-                            itemNameField.text.toString()
-                        )
+                        resources.getStringArray(R.array.course_type_values)[courseTypeSpinner.selectedItemPosition],
+                        itemNameField.text.toString()
+                    )
                         .bindToLifecycle(activity)
                         .doOnSubscribe {
                             searchProgressBar.show()

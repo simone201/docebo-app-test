@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
+    android:clickable="false"
     tools:context=".ui.fragment.SearchFragment">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/itemNameField"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/text_search_course"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/itemNameContainer" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/itemNameContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:hint="@string/field_item_name_hint"
-        android:padding="@dimen/activity_vertical_margin"
-        android:background="@color/md_blue_grey_50"
-        app:layout_constraintBottom_toTopOf="@+id/courseTypeField" />
+        app:layout_constraintBottom_toTopOf="@+id/courseTypeContainer">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/courseTypeField"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/itemNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_vertical_margin"
+            android:background="@color/md_blue_grey_50"
+            android:lines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/courseTypeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin"
-        android:background="@color/md_blue_grey_50"
-        android:hint="@string/field_course_type_hint"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/field_course_type_hint"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/courseTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_blue_grey_50"
+            android:entries="@array/course_type_items"
+            android:hint="@string/field_course_type_hint"
+            android:padding="@dimen/activity_vertical_margin" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/searchBtn"
@@ -37,15 +75,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/btn_search_text"
-        app:layout_constraintTop_toBottomOf="@+id/courseTypeField" />
+        app:layout_constraintTop_toBottomOf="@+id/courseTypeContainer" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/searchProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:visibility="gone"
-        style="?android:attr/progressBarStyle"
         app:layout_constraintTop_toBottomOf="@+id/searchBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
