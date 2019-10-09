@@ -10,6 +10,7 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.materialize.holder.StringHolder
 import it.simonerenzo.docebotest.R
 import it.simonerenzo.docebotest.client.model.DoceboModels
+import org.jsoup.Jsoup
 
 const val EMPTY_IMAGE = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdO1fLa1aGejKjvJrh7L2ywuQFp77SdMtDX3qHqAd8l-A8dPsF"
 
@@ -28,7 +29,7 @@ class CourseItem(private val course: DoceboModels.Item) : AbstractItem<CourseIte
         private val thumb = view.findViewById<AppCompatImageView>(R.id.courseThumbnail)
         private val name = view.findViewById<AppCompatTextView>(R.id.courseName)
         private val typePrice = view.findViewById<AppCompatTextView>(R.id.courseTypePrice)
-        private val descr = view.findViewById<AppCompatTextView>(R.id.courseDescription)
+        private val desc = view.findViewById<AppCompatTextView>(R.id.courseDescription)
 
         override fun bindView(item: CourseItem, payloads: MutableList<Any>) {
             val course = item.course
@@ -38,7 +39,7 @@ class CourseItem(private val course: DoceboModels.Item) : AbstractItem<CourseIte
             thumb.background = transparent
             name.background = transparent
             typePrice.background = transparent
-            descr.background = transparent
+            desc.background = transparent
 
             val imgUri = if (course.thumbnail.isBlank()) EMPTY_IMAGE else "https://${course.thumbnail}"
 
@@ -48,16 +49,16 @@ class CourseItem(private val course: DoceboModels.Item) : AbstractItem<CourseIte
 
             StringHolder.applyToOrHide(StringHolder(course.name), name)
             StringHolder.applyToOrHide(StringHolder("${course.type} | ${course.price}"), typePrice)
-            StringHolder.applyToOrHide(
-                StringHolder(HtmlCompat.fromHtml(course.description, HtmlCompat.FROM_HTML_MODE_COMPACT)),
-                descr)
+
+            val sanitizedDesc = Jsoup.parse(course.description).text()
+            StringHolder.applyToOrHide(StringHolder(sanitizedDesc), desc)
         }
 
         override fun unbindView(item: CourseItem) {
             thumb.setImageDrawable(null)
             name.text = null
             typePrice.text = null
-            descr.text = null
+            desc.text = null
         }
 
     }

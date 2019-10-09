@@ -87,6 +87,7 @@ dependencies {
     // Utils
     implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
     implementation 'com.basgeekball:awesome-validation:4.2'
+    implementation 'org.jsoup:jsoup:1.12.1'
 
     // Test
     testImplementation 'junit:junit:4.12'
