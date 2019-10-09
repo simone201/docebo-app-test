@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:hint="@string/field_item_name_hint"
+        android:background="@android:color/transparent"
         app:boxBackgroundMode="outline"
         app:layout_constraintBottom_toTopOf="@+id/courseTypeContainer">
 
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_vertical_margin"
+            android:background="@color/md_grey_50"
             android:lines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>

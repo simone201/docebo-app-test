@@ -1,16 +1,16 @@
 package it.simonerenzo.docebotest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.mikepenz.materialize.MaterializeBuilder
 import com.trello.rxlifecycle3.android.lifecycle.kotlin.bindToLifecycle
-import com.trello.rxlifecycle3.kotlin.bindToLifecycle
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import it.simonerenzo.docebotest.client.model.DoceboModels
 import it.simonerenzo.docebotest.client.service.DoceboService
+import it.simonerenzo.docebotest.ui.fragment.CourseListFragment
 import it.simonerenzo.docebotest.ui.fragment.SearchFragment
 import kotlinx.android.synthetic.main.main_activity.*
 import org.jetbrains.anko.design.snackbar
@@ -32,6 +32,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            onSupportNavigateUp()
+        } else {
+            finish()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return if (supportFragmentManager.popBackStackImmediate()) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            true
+        } else {
+            false
+        }
+    }
+
     fun searchCatalog(courseType: String, itemName: String) : Completable {
         return Completable.create {
             doceboService.getCatalog(courseType, itemName)
@@ -40,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { res ->
-                        Log.i("API Result", "getCatalog: $res")
+                        Log.i("API Result", "Response Items Count: ${res.data.count}")
                         it.onComplete()
                         showSearchResultFragment(res)
                     },
@@ -53,8 +70,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showSearchResultFragment(results: DoceboModels.APIResponse) {
-        // TODO: change fragment to list
+    private fun showSearchResultFragment(response: DoceboModels.APIResponse) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container, CourseListFragment.newInstance(response.data))
+            .commit()
     }
 
 }
