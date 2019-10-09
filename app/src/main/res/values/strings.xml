@@ -1,8 +1,18 @@
 <resources>
-    <string name="app_name">DoceboTest</string>
+    <string name="app_name">Docebo Test</string>
+
+    <string name="text_search_course">Search your Course</string>
+    <string name="text_course_items">%1$s Items</string>
 
     <string name="field_item_name_hint">Item Name</string>
     <string name="field_course_type_hint">Course Type</string>
 
     <string name="btn_search_text">Search</string>
+    <string name="btn_list_filter">Filter</string>
+
+    <string name="error_field_not_empty">This field should not be empty</string>
+    <string name="error_request_failed">Error during network request</string>
+    <string name="error_not_implemented">Not Implemented</string>
+
+    <string name="menu_text_about">About</string>
 </resources>
