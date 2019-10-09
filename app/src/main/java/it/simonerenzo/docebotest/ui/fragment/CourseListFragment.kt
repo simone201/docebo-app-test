@@ -15,6 +15,8 @@ import it.simonerenzo.docebotest.client.model.DoceboModels
 import it.simonerenzo.docebotest.ui.item.CourseItem
 import kotlinx.android.synthetic.main.course_list_fragment.*
 import kotlinx.android.synthetic.main.course_list_header.*
+import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class CourseListFragment(private val result: DoceboModels.APIData) : Fragment() {
 
@@ -46,6 +48,8 @@ class CourseListFragment(private val result: DoceboModels.APIData) : Fragment() 
         courseList.overScrollMode = View.OVER_SCROLL_NEVER
         courseList.itemAnimator = AlphaInAnimator()
         courseList.adapter = fastAdapter
+
+        courseListFilterBtn.onClick { courseListFilterBtn.snackbar(R.string.error_not_implemented) }
     }
 
     override fun onResume() {

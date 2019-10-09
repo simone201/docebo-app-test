@@ -2,7 +2,11 @@ package it.simonerenzo.docebotest
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import com.mikepenz.materialize.MaterializeBuilder
 import com.trello.rxlifecycle3.android.lifecycle.kotlin.bindToLifecycle
 import io.reactivex.Completable
@@ -46,6 +50,24 @@ class MainActivity : AppCompatActivity() {
             true
         } else {
             false
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_about -> {
+                LibsBuilder()
+                    .withAboutAppName(resources.getString(R.string.app_name))
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                    .start(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
