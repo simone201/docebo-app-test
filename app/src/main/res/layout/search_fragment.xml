@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:hint="@string/field_item_name_hint"
+        app:boxBackgroundMode="outline"
         app:layout_constraintBottom_toTopOf="@+id/courseTypeContainer">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,7 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_vertical_margin"
-            android:background="@color/md_blue_grey_50"
             android:lines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -62,7 +62,6 @@
             android:id="@+id/courseTypeSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_blue_grey_50"
             android:entries="@array/course_type_items"
             android:hint="@string/field_course_type_hint"
             android:padding="@dimen/activity_vertical_margin" />
