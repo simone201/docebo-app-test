@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.basgeekball.awesomevalidation.AwesomeValidation
-import com.basgeekball.awesomevalidation.ValidationStyle
-import com.basgeekball.awesomevalidation.utility.RegexTemplate
+import androidx.lifecycle.ViewModelProviders
 import com.jakewharton.rxbinding3.view.clicks
 import com.trello.rxlifecycle3.android.lifecycle.kotlin.bindToLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import it.simonerenzo.docebotest.MainActivity
 import it.simonerenzo.docebotest.R
+import it.simonerenzo.docebotest.databinding.SearchFragmentBinding
+import it.simonerenzo.docebotest.ui.viewmodel.SearchFormViewModel
 import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : Fragment() {
@@ -22,25 +25,26 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
     }
 
-    private val validators = AwesomeValidation(ValidationStyle.COLORATION)
+    private lateinit var dataBinding: SearchFragmentBinding
+    private lateinit var viewModel: SearchFormViewModel
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.search_fragment, container, false)
+        dataBinding = DataBindingUtil.inflate(
+            inflater, R.layout.search_fragment, container, false)
+
+        return dataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupValidations()
-        setupListeners()
-    }
+        viewModel = ViewModelProviders.of(this).get(SearchFormViewModel::class.java)
+        dataBinding.lifecycleOwner = this
+        dataBinding.viewModel = viewModel
 
-    private fun setupValidations() {
-        validators.addValidation(itemNameField,
-            RegexTemplate.NOT_EMPTY,
-            resources.getString(R.string.error_field_not_empty))
+        setupListeners()
     }
 
     @SuppressLint("CheckResult")
@@ -48,26 +52,33 @@ class SearchFragment : Fragment() {
         val activity = requireActivity() as MainActivity
 
         searchBtn.clicks()
-            .bindToLifecycle(activity)
+            .bindToLifecycle(this)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                if (validators.validate()) {
-                    activity.searchCatalog(
-                        resources.getStringArray(R.array.course_type_values)[courseTypeSpinner.selectedItemPosition],
-                        itemNameField.text.toString()
-                    )
-                        .bindToLifecycle(activity)
-                        .doOnSubscribe {
-                            searchProgressBar.show()
-                            searchBtn.isEnabled = false
-                        }
-                        .doOnTerminate {
-                            searchProgressBar.hide()
-                            searchBtn.isEnabled = true
-                        }
-                        .subscribe()
-                }
+                activity.searchCatalog(
+                    resources.getStringArray(R.array.course_type_values)[courseTypeSpinner.selectedItemPosition],
+                    viewModel.itemName.value ?: ""
+                )
+                    .bindToLifecycle(this)
+                    .doOnSubscribe {
+                        searchProgressBar.show()
+                        searchBtn.isEnabled = false
+                    }
+                    .doOnTerminate {
+                        searchProgressBar.hide()
+                        searchBtn.isEnabled = true
+                    }
+                    .subscribe()
             }
+
+        itemNameField.setOnEditorActionListener { _, actionId, _ ->
+            if (EditorInfo.IME_ACTION_SEARCH == actionId) {
+                searchBtn.performClick()
+                true
+            } else {
+                false
+            }
+        }
     }
 
 }
