@@ -22,7 +22,6 @@ import it.simonerenzo.docebotest.client.model.DoceboModels
 import it.simonerenzo.docebotest.ui.item.CourseItem
 import kotlinx.android.synthetic.main.course_list_fragment.*
 import kotlinx.android.synthetic.main.course_list_header.*
-import java.lang.NumberFormatException
 
 class CourseListFragment(private val result: DoceboModels.APIData) : Fragment(),
     PopupMenu.OnMenuItemClickListener {
